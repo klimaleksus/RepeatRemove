@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>RepeatRemove v1.2!</title>
+<style>
+body{
+  text-align: center;
+}
+audio{
+  width: 90%;
+  padding: 16px;
+}
+input{
+  width: 80%;
+  border: 1px dashed black;
+  padding: 16px;
+  margin: 16px;
+}
+button{
+  margin: 4px;
+  font: normal 14pt Arial;
+}
+textarea{
+  font: bold 14px Courier New, Courier, monospace;
+  color: #ccc;
+  background: #333;
+  line-height: 1;
+}
+textarea[disabled]{
+  color: #fff;
+  background: #000;
+}
+p{
+  font: normal 12pt Arial;
+}
+p a[target]{
+  color: black;
+}
+header{
+  width:70%;
+  margin:auto;
+}
+aside p{
+  font: bold italic 14pt Arial;
+}
+</style>
+<script src="./buffer.js"></script>
+<script src="./polyfill.js"></script>
+<script src="./aurora.js"></script>
+<script src="./rr_lib.js"></script>
+</head>
+<body>
+<hr>
+<header>
+<p>This is a browser demo of <strong>repeat_remove</strong> port for javascript. Refer to the <a href="../">main page</a> for more information. No server connection is used, all scripts and processing will run locally in your browser!</p>
+<p>Open any music file (drag and drop), then use it directly (for .wav) or try to convert to WAVE format via browser support (which may vary; also your file will be resampled) or with <a href="https://github.com/audiocogs/aurora.js" target="_blank">aurora.js</a> (only .mp3, .flac and .m4a are supported; sometimes throws unrecoverable errors or truncates output), whichever works for you.</p>
+<p>Then, process it with native javascript (uses <a href="https://babeljs.io" target="_blank">Babel</a>, slower) or with WebWorkers feature (fast; will not work if this page was opened from local .htm file).</p>
+<p>You can inspect your results by using HTML5 Audio controls below, and also you can save output .wav files by clicking on filenames. You need a modern browser for this page to work properly (tested in Chrome 49 and Firefox 52);</p>
+<p>P.S. If you just want to quickly test this program, download <a href="../test.wav" download="test.wav">test.wav</a> and apply it. Not the best example, though.</p>
+</header>
+<aside id="mynoscript">
+<hr>
+<p>Looks like an error occurred!</p>
+<p>Your browser should support modern javascript with TypedArray, HTML5 Audio and WebWorkers.</p>
+<p>Also a few other .js scripts ought to be loaded here.</p>
+<p>Refresh this page or check your developer console.</p>
+</aside>
+<hr>
+<h1>Choose music:</h1>
+<input type="file" accept="audio/*" id="myfile">
+<br>
+<button id="myuseraw">Use as is</button>
+<button id="myusebrowser">Convert in browser</button>
+<button id="myuseaurora">Convert with Aurora</button>
+<button id="myuseclear">Clear</button>
+<h2 id="mycaption_src">&nbsp;</h2>
+<audio controls loop id="myaudio_src"></audio>
+<br>
+<button id="myrunbrowser">Run in browser</button>
+<button id="myrunworker">Run with WebWorkers</button>
+<button id="myrunabort">Abort</button>
+<br><br>
+<textarea id="myconsole" size="80" cols="80" rows="32" width="80" wrap="off" spellcheck="false" readonly ></textarea>
+<br>
+<h2 id="mycaption_out">&nbsp;</h2>
+<audio controls loop id="myaudio_out"></audio>
+<h2 id="mycaption_loop">&nbsp;</h2>
+<audio controls loop id="myaudio_loop"></audio>
+<hr>
+<script src="./rr_demo.js"></script>
+<script>
+if(window.my_loaded_demo
+  &&window.my_loaded_buffer
+  &&window.my_loaded_polyfill
+  &&window.my_loaded_aurora
+  &&window.my_loaded_lib){
+    mynoscript.style.display = 'none';
+}
+</script>
+</body>
+</html>
